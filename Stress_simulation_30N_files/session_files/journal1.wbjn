@@ -1,0 +1,40 @@
+# encoding: utf-8
+# 2023 R2
+SetScriptVersion(Version="23.2.142")
+template1 = GetTemplate(
+    TemplateName="Static Structural",
+    Solver="ANSYS")
+system1 = template1.CreateSystem()
+favorites1 = EngData.LoadFavoriteItems()
+library1 = EngData.OpenLibrary(
+    Name="ANSYS GRANTA Materials Data for Simulation (Sample)",
+    Source="Granta_Design_Typical_Materials.xml")
+engineeringData1 = system1.GetContainer(ComponentName="Engineering Data")
+matl1 = engineeringData1.ImportMaterial(
+    Name="Plastic, ABS (high-impact)",
+    Source="Granta_Design_Typical_Materials.xml")
+geometry1 = system1.GetContainer(ComponentName="Geometry")
+geometry1.SetFile(FilePath="D:/Solidworks_New/10x13 New Model/Morphing_fin_modified1.STEP")
+modelComponent1 = system1.GetComponent(Name="Model")
+modelComponent1.Refresh()
+model1 = system1.GetContainer(ComponentName="Model")
+model1.Edit()
+modelComponent1.Update(AllDependencies=True)
+setup1 = system1.GetContainer(ComponentName="Setup")
+setup1.Edit()
+setupComponent1 = system1.GetComponent(Name="Setup")
+setupComponent1.Update(AllDependencies=True)
+solutionComponent1 = system1.GetComponent(Name="Solution")
+solutionComponent1.Update(AllDependencies=True)
+Save(Overwrite=True)
+setupComponent1.Update(AllDependencies=True)
+solutionComponent1.Update(AllDependencies=True)
+resultsComponent1 = system1.GetComponent(Name="Results")
+resultsComponent1.Update(AllDependencies=True)
+setupComponent1.Update(AllDependencies=True)
+solutionComponent1.Update(AllDependencies=True)
+resultsComponent1.Update(AllDependencies=True)
+setupComponent1.Update(AllDependencies=True)
+solutionComponent1.Update(AllDependencies=True)
+resultsComponent1.Update(AllDependencies=True)
+Save(Overwrite=True)
